@@ -136,6 +136,10 @@ module.exports.cancel_appointment = async function (req, res) {
     slot.patient = undefined;
     slot.save();
 
+    let patient = await Patient.findOne({ user: req.user._id });
+    patient.appointments.pull(req.params.id);
+    patient.save();
+
     req.flash('success', 'Appointment cancelled successfully!');
     return res.redirect('back');
 
