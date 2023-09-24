@@ -78,13 +78,13 @@
 }
 
 #submit {
-    background: #223a66;
+    background: green;
     color: #fff;
-    border-color: #223a66;
+    border-color: green;
 }
 
 #submit:hover {
-    background: #e12454;
-    border-color: #e12454;
+    background: gray;
+    border-color: gray;
     color: #fff;
 }
