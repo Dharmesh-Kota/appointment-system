@@ -1,9 +1,9 @@
 <div id="slots-container">
     <ul>
-        <% for (slot of slots) { %>
+        <% slots.forEach(function(slot) { %>
             <li>
                 <div class="slot">
-                    <div class="slot-time">
+                    <div class="slot-date">
                         <p>Date</p><%=slot.date%>
                     </div>
                     <div class="slot-time">
@@ -17,6 +17,6 @@
                     </div>
                 </div>
             </li>
-        <% } %>
+        <% }); %>
     </ul>
 </div>
