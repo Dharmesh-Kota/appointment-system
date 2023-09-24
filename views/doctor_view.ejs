@@ -1,0 +1,22 @@
+<div id="slots-container">
+    <ul>
+        <% for (slot of slots) { %>
+            <li>
+                <div class="slot">
+                    <div class="slot-time">
+                        <p>Date</p><%=slot.date%>
+                    </div>
+                    <div class="slot-time">
+                        <p>Start Time</p><%=slot.start_time%>
+                    </div>
+                    <div class="slot-time">
+                        <p>End Time</p><%=slot.end_time%>
+                    </div>
+                    <div class="patient">
+                        <p>Patient</p><%=slot.patient.name%>
+                    </div>
+                </div>
+            </li>
+        <% } %>
+    </ul>
+</div>
