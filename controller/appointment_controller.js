@@ -75,13 +75,13 @@ module.exports.book_appointment = async function (req, res) {
     try {
 
         let slot = await Slot.findById(req.body.slot);
-        console.log('Slot: ', slot);
-        console.log('User: ', req.user);
-        slot.patient = req.user._id;
+        let patient = await Patient.findOne({ user: req.user._id });
+        console.log('User: ', patient);
+        slot.patients = patient._id;
         slot.is_booked = true;
         slot.save();
+        console.log('Slot: ', slot);
 
-        let patient = await Patient.findOne({ user: req.user._id });
         patient.appointments.push(slot._id);
         patient.save();
 
@@ -103,12 +103,7 @@ module.exports.book_appointment = async function (req, res) {
 // View Appointments
 module.exports.view_appointments = async function (req, res) {
 
-    let patient = await Patient.findOne({ user: req.user._id }).populate({
-        path: 'appointments',
-        populate: {
-            path: 'patient'
-        }
-    }).exec();
+    let patient = await Patient.findOne({ user: req.user._id }).populate('appointments').exec();
 
     let appointments = patient.appointments;
 
@@ -135,13 +130,14 @@ module.exports.cancel_appointment = async function (req, res) {
 // View All Appointments
 module.exports.doctor_view = async function (req, res) {
     let slots = await Slot.find({ is_booked: true })
-                .populate({
-                    path: 'patient',
-                    populate: {
-                        path: 'user'
-                    }
-                })
+                .populate('patients')
                 .exec();
+
+    console.log('Patient: ', slots[0].patient);
+    console.log('Patient: ', slots[1].patient);
+    console.log('Patient: ', slots[2].patient);
+    console.log('Patient: ', slots[3].patient);
+    console.log('Patient: ', slots[4].patient);
 
     return res.render('doctor_view', {
         title: "Appointments | MediAssist",
