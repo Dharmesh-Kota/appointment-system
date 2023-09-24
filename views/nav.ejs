@@ -14,19 +14,23 @@
                 <li class="nav-item">
                     <a class="nav-link active color-me" aria-current="page" href="/">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/users/appointment">Appoinment</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/users/appointment/view-appointments">View_Appoinment</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/about">About_Us</a>
-                </li>
-
+                <%if(locals.user!==undefined && locals.user.role!=='practitioner' ){%>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users/appointment">Appoinment</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users/appointment/view-appointments">View_Appoinment</a>
+                    </li>
+                    <%}else{%>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/users/appointment">Appoinment</a>
+                        </li>
+                        <%}%>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/about">About_Us</a>
+                            </li>
             </ul>
             <div class="container-end">
-
                 <% if (locals.user) { %>
                     <a class="btn btn-outline-light" href="/users/profile/<%=locals.user.id%>">
                         <%=user.username%>
