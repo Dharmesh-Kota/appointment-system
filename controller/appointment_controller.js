@@ -114,6 +114,20 @@ module.exports.view_appointments = async function (req, res) {
     });
 }
 
+// View All Appointments
+module.exports.doctor_view = async function (req, res) {
+    let slots = await Slot.find({ is_booked: true })
+                .populate('patients')
+                .exec();
+
+    console.log(slots);
+
+    return res.render('doctor_view', {
+        title: "Appointments | MediAssist",
+        slots: slots
+    });
+}
+
 // Cancel Appointment
 module.exports.cancel_appointment = async function (req, res) {
 
@@ -125,22 +139,4 @@ module.exports.cancel_appointment = async function (req, res) {
     req.flash('success', 'Appointment cancelled successfully!');
     return res.redirect('back');
 
-}
-
-// View All Appointments
-module.exports.doctor_view = async function (req, res) {
-    let slots = await Slot.find({ is_booked: true })
-                .populate('patients')
-                .exec();
-
-    console.log('Patient: ', slots[0].patient);
-    console.log('Patient: ', slots[1].patient);
-    console.log('Patient: ', slots[2].patient);
-    console.log('Patient: ', slots[3].patient);
-    console.log('Patient: ', slots[4].patient);
-
-    return res.render('doctor_view', {
-        title: "Appointments | MediAssist",
-        slots: slots
-    });
 }
