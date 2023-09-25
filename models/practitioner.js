@@ -44,10 +44,10 @@ const practitionerScehma = new mongoose.Schema({
         type: String
     },
     opening_time: {
-        type: Date
+        type: String
     },
     closing_time: {
-        type: Date
+        type: String
     },
     fees: {
         type: Number
